@@ -1,7 +1,7 @@
 {
   "name": "ltimer",
   "description": "A timer for LTs (Electron)",
-  "version": "1.0.0",
+  "version": "1.0.2",
   "author": "Hashed Hyphen <hashedhyphen@gmail.com>",
   "bin": "ltimer.js",
   "bugs": "https://github.com/hashedhyphen/ltimer-electron/issues",
