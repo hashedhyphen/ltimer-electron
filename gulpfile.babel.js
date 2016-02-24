@@ -5,6 +5,7 @@ import fs from 'fs';
 import gulp       from 'gulp';
 import eslint     from 'gulp-eslint';
 import babel      from 'gulp-babel';
+import mkdirp     from 'mkdirp';
 import browserify from 'browserify';
 import babelify   from 'babelify';
 import watchify   from 'watchify';
@@ -28,6 +29,8 @@ gulp.task(`babel`, () => {
 });
 
 gulp.task(`babelify`, () => {
+  mkdirp.sync('js/build');
+
   browserify(`js/src/window.js`)
     .transform(babelify)
     .bundle()
@@ -46,6 +49,8 @@ gulp.task(`watch-babel`, () => {
 });
 
 gulp.task(`watchify`, () => {
+  mkidrp.sync('js/build');
+
   const br = browserify({
     entries: `js/src/window.js`,
     cache: {},
