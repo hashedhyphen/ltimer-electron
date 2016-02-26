@@ -6,7 +6,7 @@
   "bin": "ltimer.js",
   "bugs": "https://github.com/hashedhyphen/ltimer-electron/issues",
   "dependencies": {
-    "electron-prebuilt": "^0.36.8"
+    "electron-prebuilt": "^0.36.9"
   },
   "devDependencies": {
     "babel-eslint": "^5.0.0",
