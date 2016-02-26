@@ -17,6 +17,7 @@ Have a nice LT!
 
 ```
 git clone https://github.com/hashedhyphen/ltimer-electron
+cd ltimer-electron
 npm i
 npm run
 ```
