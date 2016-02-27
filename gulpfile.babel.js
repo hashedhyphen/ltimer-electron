@@ -29,7 +29,7 @@ gulp.task(`babel`, () => {
 });
 
 gulp.task(`babelify`, () => {
-  mkdirp.sync('js/build');
+  mkdirp.sync(`js/build`);
 
   browserify(`js/src/window.js`)
     .transform(babelify)
@@ -49,18 +49,19 @@ gulp.task(`watch-babel`, () => {
 });
 
 gulp.task(`watchify`, () => {
-  mkidrp.sync('js/build');
+  mkdirp.sync(`js/build`);
 
-  const br = browserify({
+  const opts = {
     entries: `js/src/window.js`,
     cache: {},
     packageCache: {},
     plugin: [ watchify ]
-  });
+  };
+
+  const br = browserify(opts).transform(babelify);
 
   const bundle = () => {
-    br.transform(babelify)
-      .bundle()
+    br.bundle()
       .pipe(fs.createWriteStream(`js/build/bundle.js`));
   };
 
