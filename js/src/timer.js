@@ -1,4 +1,8 @@
-import * as React from "react";
+import * as React from 'react';
+
+// 'global' avoids browserify...
+const remote = global.require(`electron`).remote
+    , Menu   = remote.Menu;
 
 export default class Timer extends React.Component {
   constructor(props) {
@@ -8,22 +12,56 @@ export default class Timer extends React.Component {
     };
   }
 
+  setMenuOf(active) {
+    /* eslint-disable indent */
+    const menu = (active)
+      ? Menu.buildFromTemplate([
+          { label: `reset`, click: this.props.onResetSelect }
+        ])
+      : Menu.buildFromTemplate([
+          { label: `start`,  click: this.props.onStartSelect  },
+          { label: `config`, click: this.props.onConfigSelect }
+        ]);
+    /* eslint-enable indent */
+
+    Menu.setApplicationMenu(menu);
+
+    this.handleContextMenu = ev => {
+      ev.preventDefault();
+      menu.popup(remote.getCurrentWindow());
+    };
+
+    window.addEventListener(
+      `contextmenu`, this.handleContextMenu, false
+    );
+  }
+
+  toggleMenu() {
+    window.removeEventListener(
+      `contextmenu`, this.handleContextMenu, false
+    );
+    this.setMenuOf(!this.props.active);
+  }
+
   componentWillMount() {
-    if (this.props.enabled) {
-      this.intervalID = setInterval(this.updateClock.bind(this), 1000);
-    }
+    this.setMenuOf(this.props.active);
   }
 
   componentWillReceiveProps(nextProps) {
-    clearInterval(this.intervalID);
-    this.setState({ remains: nextProps.duration });
-    if (nextProps.enabled) {
+    if (nextProps.active) {
+      this.toggleMenu();
       this.intervalID = setInterval(this.updateClock.bind(this), 1000);
+    } else {
+      clearInterval(this.intervalID);
+      this.toggleMenu();
+      this.setState({ remains: nextProps.duration });
     }
   }
 
   componentWillUnmount() {
-    clearInterval(this.intervalID);
+    window.removeEventListener(
+      `contextmenu`, this.handleContextMenu, false
+    );
   }
 
   updateClock() {
@@ -37,8 +75,7 @@ export default class Timer extends React.Component {
   getRemainedTime() {
     const min = Math.floor(this.state.remains / 60)
         , sec = this.state.remains % 60;
-    return (sec >= 10) ? `${min}:${sec}`
-                       : `${min}:0${sec}`;
+    return sec >= 10 ? `${min}:${sec}` : `${min}:0${sec}`;
   }
 
   render() {
@@ -47,11 +84,9 @@ export default class Timer extends React.Component {
 }
 
 Timer.propTypes = {
-  enabled:  React.PropTypes.bool,
-  duration: React.PropTypes.number
-};
-
-Timer.defaultProps = {
-  enabled: false,
-  duration: 300
+  active:   React.PropTypes.bool.isRequired,
+  duration: React.PropTypes.number.isRequired,
+  onStartSelect:  React.PropTypes.func.isRequired,
+  onResetSelect:  React.PropTypes.func.isRequired,
+  onConfigSelect: React.PropTypes.func.isRequired
 };

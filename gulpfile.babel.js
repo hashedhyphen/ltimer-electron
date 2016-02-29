@@ -31,7 +31,7 @@ gulp.task(`babel`, () => {
 gulp.task(`babelify`, () => {
   mkdirp.sync(`js/build`);
 
-  browserify(`js/src/window.js`)
+  browserify(`js/src/panel.js`)
     .transform(babelify)
     .bundle()
     .pipe(fs.createWriteStream(`js/build/bundle.js`));
@@ -52,7 +52,7 @@ gulp.task(`watchify`, () => {
   mkdirp.sync(`js/build`);
 
   const opts = {
-    entries: `js/src/window.js`,
+    entries: `js/src/panel.js`,
     cache: {},
     packageCache: {},
     plugin: [ watchify ]

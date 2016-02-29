@@ -1,7 +1,7 @@
 {
   "name": "ltimer",
   "description": "A timer for LTs (Electron)",
-  "version": "1.0.2",
+  "version": "2.0.0",
   "author": "Hashed Hyphen <hashedhyphen@gmail.com>",
   "bin": "ltimer.js",
   "bugs": "https://github.com/hashedhyphen/ltimer-electron/issues",
@@ -33,7 +33,7 @@
   "main": "js/build/index.js",
   "repository": {
     "type": "git",
-    "url": "https://github.com/hashedhyphen/ltimer-electron"
+    "url": "https://github.com/hashedhyphen/ltimer-electron.git"
   },
   "scripts": {
     "build": "gulp build",

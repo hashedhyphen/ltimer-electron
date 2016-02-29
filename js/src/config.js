@@ -12,26 +12,41 @@ export default class Config extends React.Component {
   handleMinChange(ev) {
     const minStr = ev.target.value.substr(0, 2);
     this.setState({ min: minStr });
-    this.props.handleUpdate(`min`, minStr);
   }
 
   handleSecChange(ev) {
     const secStr = ev.target.value.substr(0, 2);
     this.setState({ sec: secStr });
-    this.props.handleUpdate(`sec`, secStr);
+  }
+
+  handleSubmit(ev) {
+    ev.preventDefault();
+    this.props.onConfigSubmit({
+      min: this.state.min,
+      sec: this.state.sec
+    });
   }
 
   render() {
     return (
-      <form className="config">
+      <form
+        className="config"
+        onSubmit={this.handleSubmit.bind(this)}
+      >
         <input
+          className="min"
           value={this.state.min}
           onChange={this.handleMinChange.bind(this)}
         />
         <span>:</span>
         <input
+          className="sec"
           value={this.state.sec}
           onChange={this.handleSecChange.bind(this)}
+        />
+        <input
+          className="dummy"
+          type="submit"
         />
       </form>
     );
@@ -41,5 +56,5 @@ export default class Config extends React.Component {
 Config.propTypes = {
   min: React.PropTypes.string.isRequired,
   sec: React.PropTypes.string.isRequired,
-  handleUpdate: React.PropTypes.func.isRequired
+  onConfigSubmit: React.PropTypes.func.isRequired
 };
