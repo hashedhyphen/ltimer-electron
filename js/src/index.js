@@ -9,13 +9,13 @@ app.on(`window-all-closed`, () => {
 
 app.on(`ready`, () => {
   const BrowserWindow = electron.BrowserWindow
-      , workArea = electron.screen.getPrimaryDisplay().workArea;
+      , display = electron.screen.getPrimaryDisplay();
 
   mainWindow = new BrowserWindow({
     width: 150,
     height: 70,
-    x: workArea.width - 150,
-    y: workArea.height - 70,
+    x: display.size.width - 150,
+    y: display.size.height - 70,
     resizable: false,
     alwaysOnTop: true,
     frame: false,
