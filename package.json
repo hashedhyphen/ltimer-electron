@@ -1,17 +1,17 @@
 {
   "name": "ltimer",
   "description": "A timer for LTs (Electron)",
-  "version": "2.1.10",
+  "version": "2.1.11",
   "author": "Hashed Hyphen <hashedhyphen@gmail.com>",
   "bin": "ltimer.js",
   "bugs": "https://github.com/hashedhyphen/ltimer-electron/issues",
   "dependencies": {
-    "electron-prebuilt": "^1.0.1",
-    "react": "^15.0.2",
-    "react-dom": "^15.0.2"
+    "electron-prebuilt": "^1.1.3",
+    "react": "^15.1.0",
+    "react-dom": "^15.1.0"
   },
   "devDependencies": {
-    "babel-preset-es2015": "^6.6.0",
+    "babel-preset-es2015": "^6.9.0",
     "babel-preset-react": "^6.5.0",
     "babelify": "^7.3.0",
     "browserify": "^13.0.1",
