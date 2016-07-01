@@ -8,7 +8,7 @@
   "dependencies": {
     "electron-prebuilt": "^1.2.3",
     "react": "^15.1.0",
-    "react-dom": "^15.1.0"
+    "react-dom": "^15.2.0"
   },
   "devDependencies": {
     "babel-preset-es2015": "^6.9.0",
